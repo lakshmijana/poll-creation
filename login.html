@@ -1,0 +1,136 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #b7e4c7;
+            padding-top: 2em;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column; /* Stack children vertically */
+            align-items: center; /* Center the content horizontally */
+            width: 100%;
+            max-width: 400px; /* Match the form's max width */
+        }
+
+        form {
+            background-color: #fff;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%; /* Full width of container */
+            box-sizing: border-box;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 0.8em;
+            margin: 0.5em 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+
+        input[type="button"] {
+            width: 100%;
+            padding: 0.8em;
+            border: none;
+            border-radius: 4px;
+            font-size: 1em;
+            font-weight: bold;
+            color: #fff;
+            background-color: #4CAF50;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="button"]:hover {
+            background-color: #45a049;
+        }
+
+        /* Style for Get Started button */
+        .get-started-button {
+            display: none; /* Hide initially */
+            width: 100%;
+            padding: 0.8em; /* Same padding as the Login button */
+            border: none;
+            border-radius: 4px;
+            font-size: 1em;
+            font-weight: bold;
+            color: #fff;
+            background-color: #FF7F50; /* Different color for differentiation */
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 1em; /* Space between form and button */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .get-started-button:hover {
+            background-color: #FF7F50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form>
+            <input type="text" id="user" placeholder="Enter username"><br>
+            <input type="text" id="pass" placeholder="Enter password"><br>
+            <input type="button" value="Login" id="register"><br>
+        </form>
+
+        <!-- Get Started Button outside of the form -->
+        <button class="get-started-button" id="getStarted">Get Started</button>
+    </div>
+
+    <script>
+        var reg = document.getElementById("register");
+        var getStartedBtn = document.getElementById("getStarted");
+
+        reg.addEventListener("click", function(e) {
+            e.preventDefault();
+            var user = document.getElementById("user").value;
+            var pass = document.getElementById("pass").value;
+            console.log(user, pass);
+
+            var data = localStorage.getItem("register");
+            var data1 = JSON.parse(data);
+            console.log("regdata", data1);
+
+            var ar = [];
+            for (var i = 0; i < data1.length; i++) {
+                if (data1[i].user == user) {
+                    ar.push(data1[i]);
+                }
+            }
+
+            if (ar.length > 0) {
+                if (user == ar[0].user && pass == ar[0].pass) {
+                    alert("User login successful");
+                    getStartedBtn.style.display = 'block'; // Show the Get Started button
+                    getStartedBtn.addEventListener("click", function() {
+                        window.location.assign("getstarted.html");
+                    });
+                } else {
+                    alert("Username or password incorrect");
+                }
+            } else {
+                alert("Please register");
+            }
+        });
+    </script>
+</body>
+</html>

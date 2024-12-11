@@ -1,0 +1,150 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote on Polls</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7f9fc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .poll-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            margin: 20px 0;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .poll-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+        }
+        .poll-question {
+            font-size: 18px;
+            color: #34495e;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .poll-option {
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+        }
+        .poll-option input {
+            margin-right: 10px;
+            accent-color: #007bff;
+        }
+        button {
+            margin-top: 15px;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        .footer {
+            margin-top: 20px;
+            color: #666;
+            font-size: 14px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Vote on Polls</h1>
+    <div id="polls"></div>
+
+    <div class="footer">Your voice matters!</div>
+
+    <script>
+        // Function to load and display polls
+        function loadPolls() {
+            const polls = JSON.parse(localStorage.getItem("polls") || "[]");
+            const pollsContainer = document.getElementById("polls");
+            pollsContainer.innerHTML = ""; // Clear previous content
+
+            polls.forEach((poll, pollIndex) => {
+                const pollDiv = document.createElement("div");
+                pollDiv.className = "poll-container";
+
+                // Poll question
+                const question = document.createElement("div");
+                question.className = "poll-question";
+                question.textContent = poll.question;
+                pollDiv.appendChild(question);
+
+                // Poll options
+                poll.options.forEach((option, optionIndex) => {
+                    const optionLabel = document.createElement("label");
+                    optionLabel.className = "poll-option";
+                    optionLabel.innerHTML = `
+                        <input type="radio" name="poll-${pollIndex}" value="${optionIndex}">
+                        ${option}
+                    `;
+                    pollDiv.appendChild(optionLabel);
+                });
+
+                // Vote button
+                const voteButton = document.createElement("button");
+                voteButton.textContent = "Vote";
+                voteButton.addEventListener("click", () => votePoll(pollIndex));
+                pollDiv.appendChild(voteButton);
+
+                pollsContainer.appendChild(pollDiv);
+            });
+        }
+
+        // Function to handle voting
+        function votePoll(pollIndex) {
+            const polls = JSON.parse(localStorage.getItem("polls") || "[]");
+            const selectedOption = document.querySelector(`input[name="poll-${pollIndex}"]:checked`);
+
+            if (!selectedOption) {
+                alert("Please select an option to vote!");
+                return;
+            }
+
+            const selectedOptionIndex = parseInt(selectedOption.value);
+
+            // Increment the vote count for the selected option
+            polls[pollIndex].votes[selectedOptionIndex] += 1;
+
+            // Save updated polls back to localStorage
+            localStorage.setItem("polls", JSON.stringify(polls));
+
+            alert("Thank you for voting!");
+            loadPolls(); // Refresh polls to show updated vote counts
+        }
+
+        // Load polls when the page is loaded
+        window.onload = loadPolls;
+    </script>
+</body>
+</html>

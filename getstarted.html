@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poll Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(to bottom right, #e0f7fa, #b2dfdb);
+            padding: 1em;
+        }
+
+        .main-container {
+            text-align: center;
+            max-width: 1000px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 1em;
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: space-around;
+            gap: 2em;
+            margin-top: 2em;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 2.5em;
+            width:350px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-icon {
+            font-size: 3em;
+            color: #00796b;
+            margin-bottom: 0.5em;
+            transition: transform 0.3s;
+        }
+
+        .card:hover .card-icon {
+            transform: scale(1.1);
+        }
+
+        .card h3 {
+            font-size: 1.5em;
+            color: #333;
+            margin: 0.5em 0;
+        }
+
+        .card p {
+            color: #666;
+            font-size: 1em;
+            margin-bottom: 1.5em;
+        }
+
+        .card button {
+            background-color: #00796b;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 0.7em 1.5em;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .card button:hover {
+            background-color: #005f56;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 3em;
+            color: #777;
+            font-size: 0.9em;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <h1>Welcome to the Poll Platform</h1>
+        <p style="color:#555; font-size:1.1em;">Easily create, vote, and track poll results</p>
+        <div class="card-container">
+            <!-- Create Poll Card -->
+            <div class="card" onclick="location.href='createpoll.html'">
+                <div class="card-icon">📝</div>
+                <h3>Create a Poll</h3>
+                <p>Start a new poll and invite others to participate.</p>
+                <button>Create Poll</button>
+            </div>
+
+            <!-- Vote on a Poll Card -->
+            <div class="card" onclick="location.href='votepoll.html'">
+                <div class="card-icon">🗳️</div>
+                <h3>Vote on a Poll</h3>
+                <p>Participate in open polls and cast your vote.</p>
+                <button>Vote Now</button>
+            </div>
+
+            <!-- See Results Card -->
+            <div class="card" onclick="location.href='results.html'">
+                <div class="card-icon">📊</div>
+                <h3>See Results</h3>
+                <p>View the outcomes and analytics of polls.</p>
+                <button>View Results</button>
+            </div>
+        </div>
+        
+        <!-- Footer Section -->
+        <div class="footer">
+            © 2024 Poll Platform. Your voice matters.
+        </div>
+    </div>
+</body>
+</html>

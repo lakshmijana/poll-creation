@@ -1,0 +1,131 @@
+
+ * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    font-family: Arial, sans-serif;
+}
+.nav {
+    position: sticky;
+    top: 0;
+    z-index: 10; /* Ensures it stays above other content */
+    background-color: #20B2AA; /* Retain background color */
+    /* padding: px 0; */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for better separation */
+}
+.nav a{
+text-decoration: none;
+}
+
+/* Container */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header */
+.header {
+    background-color: #20B2AA;
+    
+    color: #fff;
+    padding: 15px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    position: sticky;
+}
+
+
+
+.nav-links {
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #FF7F50;
+
+
+}
+
+
+
+
+
+
+body, html {
+    font-family: Arial, sans-serif;
+    height: 100%;
+}
+
+/* Original nav styling */
+ul#nav {
+    display: flex;
+    justify-content: space-around;
+    list-style-type: none;
+    margin: 0;
+    padding: 15px;
+    background-color: #20B2AA;
+}
+
+ul#nav li {
+    color: #FFFFFF;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 5px;
+}
+
+ul#nav li:hover {
+    background-color: #FF7F50;
+    color: #F5F5F5;
+}
+
+
+
+
+
+
+/* Footer */
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0; /* Increase padding for a thicker footer */
+    text-align: center;
+    font-size: 1.1em; /* Slightly larger font size */
+  
+}
+
+.footer p {
+    margin: 10px 0; /* Add spacing between footer items */
+}
+
+.footer a {
+    color: #FF7F50; /* Coral for links */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+.hidden {
+    display: none;
+}
+

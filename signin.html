@@ -1,0 +1,90 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Aligns the form towards the top */
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+            padding-top: 2em; /* Adds space at the top */
+            background-color: #b7e4c7
+        }
+
+        form {
+            background-color: #fff;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 0.8em;
+            margin: 0.5em 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+
+        input[type="button"] {
+            width: 100%;
+            padding: 0.8em;
+            border: none;
+            border-radius: 4px;
+            font-size: 1em;
+            font-weight: bold;
+            color: #fff;
+            background-color: #4CAF50;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="button"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <form>
+        <input type="text" id="user" placeholder="Enter username"><br>
+        <input type="text" id="pass" placeholder="Enter password"><br>
+        <input type="button" value="Register" id="register">
+    </form>
+
+    <script>
+        var reg = document.getElementById("register");
+        var arr = [];
+        reg.addEventListener("click", function(e) {
+            e.preventDefault();
+            var user = document.getElementById("user").value;
+            var pass = document.getElementById("pass").value;
+            console.log(user, pass);
+            var obj = {
+                user: user,
+                pass: pass
+            };
+            console.log(obj);
+            arr.push(obj);
+            localStorage.setItem("register", JSON.stringify(arr));
+
+            var y = confirm("Register successful. Do you want to go to the login page?");
+            if (y) {
+                window.location.assign("./login.html");
+            }
+        });
+    </script>
+</body>
+</html>

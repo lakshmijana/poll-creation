@@ -1,0 +1,308 @@
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Poll</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #c3e0e5, #f5f5f5);
+            padding: 1em;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background-color: #fff;
+            padding: 2em;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 1em;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 0.8em;
+            margin-top: 1em;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+            color: #333;
+        }
+
+        .option-container {
+            margin-top: 1em;
+            text-align: left;
+        }
+
+        .add-option {
+            display: inline-block;
+            background-color: #00796b;
+            color: white;
+            border: none;
+            padding: 0.6em 1em;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 1em;
+            transition: background-color 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .add-option:hover {
+            background-color: #005f56;
+        }
+
+        .create-poll {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 0.8em 1.5em;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 1.5em;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .create-poll:hover {
+            background-color: #388e3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Create a New Poll</h1>
+        <input type="text" id="pollQuestion" placeholder="Enter your poll question">
+
+        <div class="option-container" id="optionContainer">
+            <input type="text" placeholder="Option 1" class="poll-option">
+            <input type="text" placeholder="Option 2" class="poll-option">
+        </div>
+
+        <button class="add-option" onclick="addOption()">+ Add Option</button>
+        <button class="create-poll" onclick="createPoll()">Create Poll</button>
+    </div>
+
+    <script>
+        // Function to dynamically add new options
+        function addOption() {
+         
+          
+            const optionContainer = document.getElementById("optionContainer");
+            // const optionCount = optionContainer.children.length + 1;
+            const optionCount = optionContainer.querySelectorAll('.poll-option').length + 1;
+            const newOption = document.createElement("input");
+            newOption.type = "text";
+            newOption.placeholder = `Option ${optionCount}`;
+            newOption.className = "poll-option";
+            optionContainer.appendChild(newOption);
+        }
+
+       
+        function createPoll() {
+          
+            // localStorage.clear();
+    const question = document.getElementById("pollQuestion").value;
+    const optionElements = document.querySelectorAll('.poll-option');
+    const options = [];
+
+    for (let i = 0; i < optionElements.length; i++) {
+        const value = optionElements[i].value.trim();
+        if (value !== "") {
+            options.push(value);
+        }
+    }
+
+    if (!question.trim() || options.length < 2) {
+        alert("Please enter a question and at least two options.");
+        return;
+    }
+    const votes = [];
+for (let i = 0; i < options.length; i++) {
+    votes[i] = 0;
+}
+
+    // Poll object to save
+    const poll = {
+        question: question,
+        options: options,
+        votes:votes,// Initial votes set to 0 for each option
+    };
+
+    // Retrieve existing polls from localStorage, or initialize an empty array
+    const polls = JSON.parse(localStorage.getItem("polls") || "[]");
+    polls.push(poll);
+
+    // Save updated polls array to localStorage
+    localStorage.setItem("polls", JSON.stringify(polls));
+
+    alert("Poll created successfully!");
+    // Optionally, redirect to another page
+    window.location.href = "votePoll.html";
+}
+
+    </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Poll</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #c3e0e5, #f5f5f5);
+            padding: 1em;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background-color: #fff;
+            padding: 2em;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 1em;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 0.8em;
+            margin-top: 1em;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+            color: #333;
+        }
+
+        .option-container {
+            margin-top: 1em;
+            text-align: left;
+        }
+
+        .add-option, .create-poll {
+            display: inline-block;
+            border: none;
+            padding: 0.8em 1.5em;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 1.5em;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .add-option {
+            background-color: #00796b;
+        }
+
+        .add-option:hover {
+            background-color: #005f56;
+        }
+
+        .create-poll {
+            background-color: #4CAF50;
+        }
+
+        .create-poll:hover {
+            background-color: #388e3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Create a New Poll</h1>
+        <input type="text" id="pollQuestion" placeholder="Enter your poll question">
+
+        <div class="option-container" id="optionContainer">
+            <input type="text" placeholder="Option 1" class="poll-option">
+            <input type="text" placeholder="Option 2" class="poll-option">
+        </div>
+
+        <button class="add-option" onclick="addOption()">+ Add Option</button>
+        <button class="create-poll" onclick="createPoll()">Create Poll</button>
+    </div>
+
+    <script>
+        // Function to dynamically add new options
+        function addOption() {
+            const optionContainer = document.getElementById("optionContainer");
+            const optionCount = optionContainer.querySelectorAll('.poll-option').length + 1;
+            const newOption = document.createElement("input");
+            newOption.type = "text";
+            newOption.placeholder = `Option ${optionCount}`;
+            newOption.className = "poll-option";
+            optionContainer.appendChild(newOption);
+        }
+
+        // Function to create and save the poll
+        function createPoll() {
+            const question = document.getElementById("pollQuestion").value.trim();
+            const optionElements = document.querySelectorAll('.poll-option');
+            const options = Array.from(optionElements)
+                                .map(opt => opt.value.trim())
+                                .filter(opt => opt !== "");
+
+            if (!question || options.length < 2) {
+                alert("Please enter a question and at least two options.");
+                return;
+            }
+
+            const votes = new Array(options.length).fill(0);
+
+            const poll = { question, options, votes };
+
+            const polls = JSON.parse(localStorage.getItem("polls") || "[]");
+            polls.push(poll);
+
+            localStorage.setItem("polls", JSON.stringify(polls));
+
+            alert("Poll created successfully!");
+            window.location.href = "votePoll.html";
+        }
+    </script>
+</body>
+</html>

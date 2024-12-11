@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poll Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e7f5ff;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .poll {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            background-color:  #b7e4c7;
+        }
+
+        .poll h3 {
+            margin-bottom: 10px;
+            font-size: 1.5em;
+            color: #00796b;
+        }
+
+        .result-item {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /* color: #555; */
+            
+        }
+
+        .result-item:last-child {
+            border-bottom: none; /* Remove border from last item */
+        }
+
+        .percentage {
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        .no-polls {
+            text-align: center;
+            font-size: 1.2em;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Poll Results</h2>
+        <div id="resultContainer"></div>
+        <div id="noPollsMessage" class="no-polls" style="display: none;">No polls available.</div>
+    </div>
+
+    <script>
+        function loadResults() {
+            const polls = JSON.parse(localStorage.getItem("polls") || "[]");
+            const resultContainer = document.getElementById("resultContainer");
+            const noPollsMessage = document.getElementById("noPollsMessage");
+
+            if (polls.length === 0) {
+                noPollsMessage.style.display = "block";
+                return;
+            }
+
+            polls.forEach((poll) => {
+                const resultElement = document.createElement("div");
+                resultElement.classList.add("poll");
+                resultElement.innerHTML = `<h3>${poll.question}</h3>`;
+                
+                // Calculate total votes
+                const totalVotes = poll.votes.reduce((sum, vote) => sum + vote, 0);
+                
+                poll.options.forEach((option, optionIndex) => {
+                    const voteCount = poll.votes[optionIndex];
+                    const percentage = totalVotes > 0 ? ((voteCount / totalVotes) * 100).toFixed(2) : 0;
+                    resultElement.innerHTML += `
+                        <div class="result-item">
+                            <span>${option}: ${voteCount} vote(s)</span>
+                            <span class="percentage">(${percentage}%)</span>
+                        </div>
+                    `;
+                });
+
+                resultContainer.appendChild(resultElement);
+            });
+        }
+
+        // Load results when the page loads
+        window.onload = loadResults;
+    </script>
+</body>
+</html>
