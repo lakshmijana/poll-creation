@@ -1,5 +1,5 @@
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -116,6 +116,162 @@
 
         // Load results when the page loads
         window.onload = loadResults;
+    </script>
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poll Results</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7f9fc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .poll-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            margin: 20px 0;
+        }
+        .poll-question {
+            font-size: 18px;
+            color: #34495e;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+            text-transform: uppercase;
+        }
+        tr:nth-child(even) {
+            background-color: #f7f9fc;
+        }
+        .footer {
+            margin-top: 20px;
+            color: #666;
+            font-size: 14px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Poll Results</h1>
+    <div id="poll-results"></div>
+
+    <div class="footer">Thanks for participating in our polls!</div>
+
+    <script>
+        // Prepopulate default polls
+        if (!localStorage.getItem("polls")) {
+            const defaultPolls = [
+                {
+                    question: "What's your favorite programming language?",
+                    options: ["JavaScript", "Python", "Java", "C++"],
+                    votes: [5, 3, 2, 1]
+                },
+                {
+                    question: "Which is your favorite color?",
+                    options: ["Red", "Blue", "Green", "Yellow"],
+                    votes: [3, 6, 1, 2]
+                },
+                {
+                    question: "What type of movies do you enjoy?",
+                    options: ["Action", "Comedy", "Drama", "Sci-Fi"],
+                    votes: [7, 4, 3, 2]
+                },
+                {
+                    question: "Which is your preferred mode of transport?",
+                    options: ["Car", "Bike", "Public Transport", "Walking"],
+                    votes: [4, 5, 2, 3]
+                },
+                {
+                    question: "What’s your favorite meal of the day?",
+                    options: ["Breakfast", "Lunch", "Dinner", "Snacks"],
+                    votes: [6, 8, 5, 4]
+                }
+            ];
+            localStorage.setItem("polls", JSON.stringify(defaultPolls));
+        }
+
+        // Function to display poll results
+        function displayPollResults() {
+            const polls = JSON.parse(localStorage.getItem("polls") || "[]");
+            const resultsContainer = document.getElementById("poll-results");
+            resultsContainer.innerHTML = ""; // Clear previous content
+
+            polls.forEach((poll) => {
+                const pollDiv = document.createElement("div");
+                pollDiv.className = "poll-container";
+
+                // Poll question
+                const question = document.createElement("div");
+                question.className = "poll-question";
+                question.textContent = poll.question;
+                pollDiv.appendChild(question);
+
+                // Results table
+                const table = document.createElement("table");
+
+                // Table header
+                const headerRow = document.createElement("tr");
+                const headerOption = document.createElement("th");
+                headerOption.textContent = "Option";
+                const headerVotes = document.createElement("th");
+                headerVotes.textContent = "Votes";
+                headerRow.appendChild(headerOption);
+                headerRow.appendChild(headerVotes);
+                table.appendChild(headerRow);
+
+                // Table rows for each option
+                poll.options.forEach((option, index) => {
+                    const row = document.createElement("tr");
+                    const optionCell = document.createElement("td");
+                    optionCell.textContent = option;
+                    const votesCell = document.createElement("td");
+                    votesCell.textContent = poll.votes[index];
+                    row.appendChild(optionCell);
+                    row.appendChild(votesCell);
+                    table.appendChild(row);
+                });
+
+                pollDiv.appendChild(table);
+                resultsContainer.appendChild(pollDiv);
+            });
+        }
+
+        // Display results when the page is loaded
+        window.onload = displayPollResults;
     </script>
 </body>
 </html>
